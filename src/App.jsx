@@ -14,6 +14,20 @@ function App() {
     setTaskList([...taskList, obj]);
   };
 
+  const switchTask = (id, type) => {
+    setTaskList(
+      taskList.map((item) => {
+        if (item.id === id) {
+          item.type = type;
+        }
+        return item;
+      })
+    );
+  };
+
+  const handleOnDelete = (id) => {
+    setTaskList(taskList.filter((item) => item.id !== id));
+  };
   const randomIdGenerator = (length = 6) => {
     const str =
       "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
@@ -40,7 +54,11 @@ function App() {
 
           {/* <!-- Tables --> */}
 
-          <Table taskList={taskList} />
+          <Table
+            taskList={taskList}
+            switchTask={switchTask}
+            handleOnDelete={handleOnDelete}
+          />
 
           <div className="alert alert-success">
             Total Allocated Hours = <span id="ttlHrs">0</span> hrs

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Table = ({ taskList }) => {
+export const Table = ({ taskList, switchTask, handleOnDelete }) => {
   const entryList = taskList.filter((item) => item.type === "entry");
 
   const badList = taskList.filter((item) => item.type === "bad");
@@ -19,17 +19,13 @@ export const Table = ({ taskList }) => {
                   <td>{item.hr}</td>
                   <td className="text-end">
                     <button
-                      onclick="handleOnDelete('${
-                                  item.id
-                                }')"
+                      onClick={() => handleOnDelete(item.id)}
                       className="btn btn-danger"
                     >
                       <i className="fa-regular fa-trash-can"></i>
                     </button>
                     <button
-                      onclick="switchTask('${
-                                  item.id
-                                }', 'bad')"
+                      onClick={() => switchTask(item.id, "bad")}
                       className="btn btn-success"
                     >
                       <i className="fa-solid fa-arrow-right"></i>
@@ -52,22 +48,18 @@ export const Table = ({ taskList }) => {
                   <td>{i + 1}</td>
                   <td>{item.task}</td>
                   <td>{item.hr}hr</td>
-                  <td class="text-end">
+                  <td className="text-end">
                     <button
-                      onclick="switchTask('${
-                                        item.id
-                                      }', 'entry')"
-                      class="btn btn-warning"
+                      onClick={() => switchTask(item.id, "entry")}
+                      className="btn btn-warning"
                     >
-                      <i class="fa-solid fa-arrow-left"></i>
+                      <i className="fa-solid fa-arrow-left"></i>
                     </button>
                     <button
-                      onclick="handleOnDelete('${
-                                         item.id
-                                       }')"
-                      class="btn btn-danger"
+                      onClick={() => handleOnDelete(item.id)}
+                      className="btn btn-danger"
                     >
-                      <i class="fa-regular fa-trash-can"></i>
+                      <i className="fa-regular fa-trash-can"></i>
                     </button>
                   </td>
                 </tr>
