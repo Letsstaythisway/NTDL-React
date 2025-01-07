@@ -13,7 +13,6 @@ function App() {
     };
     setTaskList([...taskList, obj]);
   };
-  console.log(taskList);
 
   const randomIdGenerator = (length = 6) => {
     const str =
@@ -41,7 +40,7 @@ function App() {
 
           {/* <!-- Tables --> */}
 
-          <Table />
+          <Table taskList={taskList} />
 
           <div className="alert alert-success">
             Total Allocated Hours = <span id="ttlHrs">0</span> hrs
