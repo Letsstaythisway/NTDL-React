@@ -7,6 +7,9 @@ const hrPerWeek = 24 * 7;
 
 function App() {
   const [taskList, setTaskList] = useState([]);
+  const ttlHr = taskList.reduce((acc, item) => {
+    return acc + item.hr;
+  }, 0);
 
   const addTaskList = (taskObj) => {
     const obj = {
@@ -15,7 +18,7 @@ function App() {
       type: "entry",
     };
 
-    if (ttlHr + taskObjHr > hrPerWeek) {
+    if (ttlHr + taskObj.hr > hrPerWeek) {
       return alert("SOrry boss dont have enough time to finish this task.");
     }
     setTaskList([...taskList, obj]);
@@ -47,10 +50,6 @@ function App() {
     }
     return id;
   };
-
-  const ttlHr = taskList.reduce((acc, item) => {
-    return acc + item.hr;
-  }, 0);
 
   return (
     <>
