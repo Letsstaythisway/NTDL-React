@@ -1,9 +1,10 @@
 import React from "react";
 
 export const Table = ({ taskList, switchTask, handleOnDelete }) => {
-  const entryList = taskList.filter((item) => item.type === "entry");
+  const entryList = taskList.filter((item) => item.type === "entry") || [];
 
-  const badList = taskList.filter((item) => item.type === "bad");
+  const badList = taskList.filter((item) => item.type === "bad") || [];
+
   return (
     <div className="row mt-5">
       <div className="col-md text-center">
@@ -13,7 +14,7 @@ export const Table = ({ taskList, switchTask, handleOnDelete }) => {
           <tbody id="entryList">
             {entryList.map((item, i) => {
               return (
-                <tr key={item.id}>
+                <tr key={item?.id}>
                   <td>{i + 1}</td>
                   <td>{item.task}</td>
                   <td>{item.hr}</td>
@@ -44,7 +45,7 @@ export const Table = ({ taskList, switchTask, handleOnDelete }) => {
           <tbody id="badList">
             {badList.map((item, i) => {
               return (
-                <tr key={item.id}>
+                <tr key={item?.id}>
                   <td>{i + 1}</td>
                   <td>{item.task}</td>
                   <td>{item.hr}hr</td>
@@ -68,7 +69,11 @@ export const Table = ({ taskList, switchTask, handleOnDelete }) => {
           </tbody>
         </table>
         <div className="alert alert-success">
-          You could have saved= <span id="savedHrsElm">0</span> hrs
+          You could have saved ={" "}
+          <span id="savedHrsElm">
+            {badList.reduce((acc, i) => acc + i.hr, 0)}
+          </span>{" "}
+          hr
         </div>
       </div>
     </div>

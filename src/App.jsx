@@ -3,14 +3,21 @@ import "./App.css";
 import { Form } from "./components/Form";
 import { Table } from "./components/Table";
 
+const hrPerWeek = 24 * 7;
+
 function App() {
   const [taskList, setTaskList] = useState([]);
+
   const addTaskList = (taskObj) => {
     const obj = {
       ...taskObj,
       id: randomIdGenerator(),
       type: "entry",
     };
+
+    if (ttlHr + taskObjHr > hrPerWeek) {
+      return alert("SOrry boss dont have enough time to finish this task.");
+    }
     setTaskList([...taskList, obj]);
   };
 
@@ -41,6 +48,10 @@ function App() {
     return id;
   };
 
+  const ttlHr = taskList.reduce((acc, item) => {
+    return acc + item.hr;
+  }, 0);
+
   return (
     <>
       {" "}
@@ -61,7 +72,7 @@ function App() {
           />
 
           <div className="alert alert-success">
-            Total Allocated Hours = <span id="ttlHrs">0</span> hrs
+            Total Allocated Hours = <span id="ttlHrs">{ttlHr}</span> hrs
           </div>
         </div>
       </div>

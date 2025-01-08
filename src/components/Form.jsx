@@ -7,7 +7,7 @@ export const Form = ({ addTaskList }) => {
     console.log(name, value);
     setForm({
       ...form,
-      [name]: value,
+      [name]: name === "hr" ? +value : value,
     });
   };
 
